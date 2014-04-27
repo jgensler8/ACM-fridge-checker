@@ -1,0 +1,23 @@
+{
+  "name": "ACM-fridge-checker",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jgensler8/ACM-fridge-checker",
+  "authors": [
+    "Jeff Gensler",
+    "Chase Lee",
+    "Carlos + Sunil"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "~5.2.2",
+    "backbone": "~1.1.2",
+    "d3": "~3.4.6"
+  }
+}
