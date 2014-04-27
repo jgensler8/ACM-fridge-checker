@@ -7,5 +7,7 @@ program.version('0.0.0')
  .option('-p, --port [port]', 'the port the app will listen on')
  .parse(process.argv);
 
-app.listen(program.port || 3000);
-console.log("Server started on port: " + ( program.port || 3000));
+var port = program.port || 8002;
+app.listen(port, function(){
+	console.log("Server started on port: " + port);
+});
