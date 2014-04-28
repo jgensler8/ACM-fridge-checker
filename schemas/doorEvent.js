@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
 
 exports.doorEvent = mongoose.model('doorEvent', new mongoose.Schema({
-  timeOpen: {
+  startTime: {
     required: true,
     type: Date
   },
-  timeClosed: {
+  endTime: {
     required: true,
     type: Date
   }
