@@ -14,14 +14,16 @@ while true; do
    do
     if [ $line -eq 0 ] && [ $open -eq 0 ]
     then
-      openTime=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+      openTime=`date +"%Y-%m-%dT%H:%M:%SZ"`
       open=1
     else
       if [ $line -eq 1 ] && [ $open -eq 1 ]
       then
-        closeTime=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+        closeTime=`date +"%Y-%m-%dT%H:%M:%SZ"`
 	sed -i "s/]/,/g" data
+	sed -i "s/]/,/g" data-$(date +"%H")
 	echo "{ \"startTime\" : \""$openTime"\", \"endTime\" : \""$closeTime"\" }]" >> data
+	echo "{ \"startTime\" : \""$openTime"\", \"endTime\" : \""$closeTime"\" }]" >> data-$(date +"%H")
 	echo "{ \"startTime\" : \""$openTime"\", \"endTime\" : \""$closeTime"\" }]"
         open=0
       fi
