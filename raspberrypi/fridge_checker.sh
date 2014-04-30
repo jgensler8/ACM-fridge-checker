@@ -22,6 +22,7 @@ while true; do
         closeTime=`date +"%Y-%m-%dT%H:%M:%SZ"`
 	sed -i "s/]/,/g" data
 	sed -i "s/]/,/g" data-$(date +"%H")
+	sed -i "1s/^{/[{ /" data-$(date +"%H")
 	echo "{ \"startTime\" : \""$openTime"\", \"endTime\" : \""$closeTime"\" }]" >> data
 	echo "{ \"startTime\" : \""$openTime"\", \"endTime\" : \""$closeTime"\" }]" >> data-$(date +"%H")
 	echo "{ \"startTime\" : \""$openTime"\", \"endTime\" : \""$closeTime"\" }]"
