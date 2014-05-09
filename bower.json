@@ -18,6 +18,8 @@
   "dependencies": {
     "foundation": "~5.2.2",
     "backbone": "~1.1.2",
-    "d3": "~3.4.6"
+    "d3": "~3.4.6",
+    "fullpage.js": "~1.7.6",
+    "handlebars": "~1.3.0"
   }
 }

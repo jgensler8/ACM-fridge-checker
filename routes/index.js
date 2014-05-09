@@ -23,6 +23,7 @@ router.route('/data')
   })
  /* POST new time */
  .post(function( req, res, next){
+   console.log(req);
    var newDoorEvent = new doorEventSchema({
      timeOpen: req.body.startTime,
      timeClosed: req.body.endTime

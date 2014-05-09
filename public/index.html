@@ -4,19 +4,46 @@
     <meta charset="utf-8">
     <title>ACM Fridge Monitor</title>
     <link rel="stylesheet" type="text/css" href="bower_components/foundation/css/foundation.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/fullpage.js/jquery.fullPage.css">
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" src="bower_components/modernizr/modernizr.js"></script>
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
     <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
     <script type="text/javascript" src="bower_components/foundation/js/foundation.min.js"></script>
+    <script type="text/javascript" src="bower_components/handlebars/handlebars.runtime.js"></script>
+    <script type="text/javascript" src="templates/templates.js"></script>
     <script type="text/javascript" src="bower_components/d3/d3.js"></script>
+    <script type="text/javascript" src="bower_components/fullpage.js/jquery.fullPage.js"></script>
+    <script type="text/javascript" src="bower_components/fullpage.js/vendors/jquery.slimscroll.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="js/models/DoorTimeModel.js"></script>
+    <script type="text/javascript" src="js/views/DoorTimeView.js"></script>
+    <script type="text/javascript" src="js/collections/DoorTimesCollection.js"></script>
+    <script type="text/javascript" src="js/models/AnalysisModel.js"></script>
+    <script type="text/javascript" src="js/views/AnalysisView.js"></script>
+    <script type="text/javascript" src="js/views/AboutView.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
   </head>
 
   <body>
-    <div id="app"> </div>
+    <div id="main">
+      <div class="fullpage">
+        <div class="section" id="front">
+        temp
+        </div>
+        <div class="section" id="detailed">
+        </div>
+        <div class="section" id="about">
+        </div>
+      </div>
+    </div>
     <script>
-     $(document).foundation();
+      $(document).foundation();
+      $(document).ready(function(){
+        $('#fullpage').fullpage();
+     })
     </script>
   </body>
 </html>
