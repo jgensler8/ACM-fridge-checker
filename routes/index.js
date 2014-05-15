@@ -23,6 +23,7 @@ router.route('/data')
   })
  /* POST new time */
  .post(function( req, res, next){
+<<<<<<< HEAD
    console.log(req);
    var newDoorEvent = new doorEventSchema({
      timeOpen: req.body.startTime,
@@ -32,7 +33,22 @@ router.route('/data')
      if(err) res.status(200).json( {error: true, type: 'DATABASE'});
      else res.status(200).json( {error: false, type: 'SUCCESS'});
    });
+=======
+   for(var time in req.body){
+     var newDoorEvent = new doorEventSchema({
+        startTime: req.body[time].startTime,
+        endTime: req.body[time].endTime
+     });
+     newDoorEvent.save( function(err){
+       if(err){
+         console.log(err);
+         return res.status(200).json( {error: true, type: 'DATABASE'});
+       }
+       else return res.status(200).json( {error: false, type: 'SUCCESS'});
+     });
+   };
+   
+>>>>>>> 09fd537fce5dadbfd070140f76a2a673b2c7f066
  });
-
 
 module.exports = router;
