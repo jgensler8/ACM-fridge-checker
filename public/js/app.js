@@ -4,13 +4,14 @@ var router = Backbone.Router.extend({
     '': 'showRoot'
   },
   initialize: function(){
-    this.AnalysisModel = new AnalysisModel()
-    this.AnalysisView = new AnalysisView({model: this.AnalysisModel});
+    this.AnalysisModel = new AnalysisModel();
+    this.AnalysisViewFront = new AnalysisViewFront({model: this.AnalysisModel});
+    this.AnalysisViewDetailed = new AnalysisViewDetailed({model: this.AnalysisModel});
     this.AboutView = new AboutView();
   },
   showRoot: function(){
-    $('#front').html( this.AnalysisView.renderFront().el );
-    $('#detailed').html( this.AnalysisView.renderDetailed().el);
+    $('#front').html( this.AnalysisViewFront.render().el );
+    $('#detailed').html( this.AnalysisViewDetailed.render().el);
     $('#about').html( this.AboutView.render().el);
   }
 });

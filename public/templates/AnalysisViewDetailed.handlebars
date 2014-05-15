@@ -1,3 +1,92 @@
-<div>
-detailed
+<div class="row">
+  <div class="small-12 medium-6 large-6 columns">
+    <div id="timeOpenChart"></div>
+  </div>
+  <div class="small-12 medium-6 large-6 columns">
+    <div id="daysOfWeekChart"></div>
+  </div>
 </div>
+
+<div class="row">
+  <div class="small-12 medium-6 large-6 columns">
+    <div id="daysTotalChart"></div>
+  </div>
+  <div class="small-12 medium-6 large-6 columns">
+    <div id="monthChart"></div>
+  </div>
+</div>
+
+<script>
+  d3.json("data", function(error, doorTimes) {
+
+    doorTimes.forEach(function(d, i) {
+      d.index = i;
+      d.timeOpen = (new Date(d.endTime).getTime() - new Date(d.startTime).getTime()) / 1000;
+    });
+
+    var DTCF = crossfilter(doorTimes),
+        daysOfWeek = DTCF.dimension(function(d) { return new Date(d.startTime).getDay(); }),
+        daysGroup = daysOfWeek.group(function(d) { return d; }),
+
+        timeOpen = DTCF.dimension(function(d) { return d.timeOpen }),
+        timeOpenGroup = timeOpen.group(Math.floor),
+
+        daysTotalDim = DTCF.dimension( function(d) { return d.startTime; }),
+        daysTotalGroup = daysTotalDim.group(function(d){ return d; }),
+
+        monthDim = DTCF.dimension( function(d){ return new Date(d.startTime).getMonth(); }),
+        monthGroup = monthDim.group( function(d){ return d; });
+
+    var minDate = daysTotalDim.bottom(1)[0].startTime;
+    var maxDate = daysTotalDim.top(1)[0].startTime;
+
+    var daysOfWeekChart = dc.barChart('#daysOfWeekChart');
+    var timeOpenChart = dc.barChart('#timeOpenChart');
+    var daysTotalChart = dc.barChart('#daysTotalChart');
+    var monthChart = dc.barChart('#monthChart');
+
+    var weekdays = ["Sun","Mon","Tues","Wednes","Thurs","Fri","Satur"];
+    var formatDay = function(d) {
+        return weekdays[ d % 7] + "day";
+    };
+
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var formatMonth = function(d) {
+        return months[ d % 12];
+    };
+
+    daysOfWeekChart
+      .width(500).height(500)
+      .dimension(daysOfWeek)
+      .group(daysGroup)
+      .x( d3.scale.linear().domain([-.5,6.5]) )
+      .xUnits( d3.time.days)
+      .xAxis()
+        .tickFormat( formatDay )
+        .tickValues([0,1,2,3,4,5,6]);
+
+    timeOpenChart
+      .width(500).height(500)
+      .dimension(timeOpen)
+      .group(timeOpenGroup)
+      .x( d3.scale.linear().domain([0,60]) );
+
+    daysTotalChart
+      .width(500).height(300)
+      .dimension(daysTotalDim)
+      .group(daysTotalGroup)
+      .x( d3.time.scale().domain([minDate, maxDate]) );
+
+    monthChart
+      .width(500).height(300)
+      .dimension(monthDim)
+      .group(monthGroup)
+      .x( d3.scale.linear().domain([-.5,11.5]) )
+      .xUnits( d3.time.months)
+      .xAxis()
+        .tickFormat( formatMonth );
+
+    dc.renderAll();
+    
+  });
+</script>
